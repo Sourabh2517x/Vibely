@@ -1,0 +1,174 @@
+{% extends 'users/base.html' %}
+
+{% block body %}
+<style>
+    /* Default (Light Mode) Variables */
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --input-bg: #f4f4f4;
+        --input-text: #000000;
+        --border-color: #ccc;
+        --btn-bg: #006bff;
+        --btn-text: #fff;
+        --shadow-color: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Dark Mode Variables */
+    body.dark-mode {
+        --bg-color: #1e1e1e;
+        --text-color: #f1f1f1;
+        --input-bg: #2a2a2a;
+        --input-text: #ffffff;
+        --border-color: #444;
+        --btn-bg: #006bff;
+        --btn-text: #fff;
+        --shadow-color: rgba(0, 0, 0, 0.5);
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 60px auto;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        padding: 30px 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px var(--shadow-color);
+        transition: all 0.3s ease;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+        color: var(--text-color);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        background-color: var(--input-bg);
+        color: var(--input-text);
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border 0.2s, background 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #006bff;
+        background-color: #333;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #aaa;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056d1;
+    }
+
+    /* Profile image preview */
+    .profile-img-preview {
+        display: block;
+        margin-bottom: 15px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #006bff;
+    }
+
+    /* Toggle button */
+    #theme-toggle {
+        display: block;
+        margin: 0 auto 20px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        background-color: #006bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    #theme-toggle:hover {
+        background-color: #0056d1;
+    }
+    #theme-toggle {
+        margin: 0;               /* remove extra margin */
+        padding: 6px 12px;       /* add internal padding for size */
+        vertical-align: middle;  /* align with navbar content */
+    }
+</style>
+
+<div class="form-container my-4">
+    
+
+    <h2>Update Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ user_form.first_name.label_tag }}
+            {{ user_form.first_name }}
+        </div>
+
+        <div class="form-group">
+            {{ user_form.last_name.label_tag }}
+            {{ user_form.last_name }}
+        </div>
+
+        <div class="form-group">
+            {{ user_form.email.label_tag }}
+            {{ user_form.email }}
+        </div>
+
+        <div class="form-group">
+            {% if profile_form.instance.photo %}
+            {% endif %}
+            {{ profile_form.photo }}
+        </div>
+
+        <button type="submit" class="btn-primary">Save Changes</button>
+    </form>
+</div>
+
+
+{% endblock %}

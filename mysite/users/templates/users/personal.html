@@ -1,0 +1,114 @@
+{% extends "users/base.html" %}
+
+{% block body %}
+<div class="profile-card shadow-sm p-4 rounded-4 text-center">
+    <img src="{{ user.profile.photo.url }}" alt="Profile Image" class="profile-img mb-3">
+
+    <h2 class="username">{{ user.first_name }} {{ user.last_name }}</h2>
+    <h5 class="text-muted">@{{ user.username }}</h5>
+
+    <div class="d-grid gap-2 mt-3">
+        <a class="nav-btn1" href="{% url 'edit' %}">Update Profile</a>
+        <a class="nav-btn1" href="{% url 'password_change' %}">Password Change</a>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="nav-btn1 logout-btn">Log Out</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    form {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    form .logout-btn {
+        width: 100%;
+    }
+
+    .profile-card {
+        max-width: 340px;
+        margin: 50px auto;
+        border: 1px solid #ddd;
+        background: #fff;
+    }
+
+    .profile-img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #6a11cb;
+    }
+
+    .username {
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .nav-btn1 {
+        border: none;
+        border-radius: 20px;
+        padding: 10px 16px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: #fff;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+    }
+
+    .nav-btn1:hover {
+        background: linear-gradient(135deg, #5a0fb0, #1e63d0);
+        transform: scale(1.02);
+    }
+
+    .logout-btn {
+        background: #ff4d4f !important;
+    }
+
+    .logout-btn:hover {
+        background: #d9363e !important;
+    }
+
+    /* 🌙 Dark Mode Styling */
+    body.dark-mode .profile-card {
+        background: #1e1e1e !important;
+        border: 1px solid #333 !important;
+        color: #e4e4e4 !important;
+    }
+
+    body.dark-mode .username {
+        color: #e4e4e4 !important;
+    }
+
+    body.dark-mode .text-muted {
+        color: #bbb !important;
+    }
+
+    /* 🌙 Dark Mode: Fix Navbar buttons (Add Post, My Profile) */
+    body.dark-mode .navbar {
+        background-color: #1e1e1e !important;
+    }
+
+    body.dark-mode .navbar .nav-link {
+        color: #f1f1f1 !important;
+        transition: color 0.3s ease;
+    }
+
+    body.dark-mode .navbar .nav-link:hover {
+        color: #6a11cb !important;
+    }
+
+    body.dark-mode .navbar-brand {
+        color: #f1f1f1 !important;
+    }
+</style>
+{% endblock %}

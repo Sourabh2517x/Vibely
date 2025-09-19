@@ -1,0 +1,128 @@
+{% extends 'users/base.html' %}
+
+{% block body %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        /* light mode */
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    /* Form styling */
+    .login-form {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        transition: background 0.3s, color 0.3s, border 0.3s;
+    }
+
+    .login-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Light mode inputs: black background, white text */
+    .login-form input,
+    .login-form select,
+    .login-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #000;
+        outline: none;
+        background: #000 !important;
+        color: #fff !important;
+        font-size: 14px;
+        transition: border 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+    }
+
+    .login-form input::placeholder,
+    .login-form textarea::placeholder {
+        color: #bbb !important;
+    }
+
+    .login-form input:focus,
+    .login-form select:focus,
+    .login-form textarea:focus {
+        border-color: #2575fc;
+        box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+    }
+
+    .login-form button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .login-form button:hover {
+        background: linear-gradient(135deg, #2575fc, #6a11cb);
+    }
+
+    .login-form a {
+        display: block;
+        text-align: center;
+        margin-top: 12px;
+        text-decoration: none;
+        color: #2575fc;
+        font-size: 14px;
+    }
+
+    /* Dark mode */
+    body.dark-mode {
+        background: #121212;
+        color: #f1f1f1;
+    }
+
+    body.dark-mode .login-form {
+        background: #1e1e1e !important;
+        color: #f1f1f1 !important;
+        border: 1px solid #333;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .login-form label,
+    body.dark-mode .login-form a {
+        color: #f1f1f1 !important;
+    }
+
+    /* Force inputs dark gray background with white text in dark mode */
+    body.dark-mode .login-form input,
+    body.dark-mode .login-form select,
+    body.dark-mode .login-form textarea {
+        background: #333 !important;
+        color: #fff !important;
+        border: 1px solid #444 !important;
+    }
+
+    body.dark-mode .login-form input::placeholder,
+    body.dark-mode .login-form textarea::placeholder {
+        color: #aaa !important;
+    }
+</style>
+
+<div class="login-form">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        <a href="{% url 'password_reset' %}">Forgot password?</a>
+    </form>
+</div>
+{% endblock %}
