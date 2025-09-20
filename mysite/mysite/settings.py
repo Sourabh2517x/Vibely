@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-oeq^l8o6(6e=6sqtr-5t1*jz1=o#c7%mp_+&emx!5o92tc#2!z'
 
 # Deployment settings
-DEBUG = False  # Must be False on Render
+DEBUG = True  # Must be False on Render
 
 ALLOWED_HOSTS = ["vibely-3-h8oc.onrender.com", "localhost", "127.0.0.1"]
 
