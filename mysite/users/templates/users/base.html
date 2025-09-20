@@ -112,7 +112,12 @@
     <!-- ✅ Top bar -->
     <div class="topbar">
         <h1>Vibely</h1>
-        <button id="theme-toggle">🌙</button>
+        <div class="d-flex align-items-center gap-2">
+            <button id="theme-toggle">🌙</button>
+            <a href="{% url 'personal' %}">
+                <img src="{{ user.profile.photo.url }}" class="profile-pic" alt="Me">
+            </a>
+        </div>
     </div>
 
     <!-- ✅ Page content -->
@@ -129,12 +134,16 @@
             <i class="bi bi-house-door"></i>
         </a>
         {% if user.is_authenticated %}
+        <!-- Add Post -->
         <a href="{% url 'post' %}">
             <i class="bi bi-plus-circle"></i>
         </a>
+        <!-- Profile Page Icon -->
         <a href="{% url 'profile' %}">
-            <img src="{{ user.profile.photo.url }}" class="profile-pic" alt="Me">
+            <i class="bi bi-person-circle"></i>
         </a>
+        <!-- Personal Page (Profile Pic) -->
+
         {% else %}
         <a href="/login/">
             <i class="bi bi-box-arrow-in-right"></i>
