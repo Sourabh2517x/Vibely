@@ -133,3 +133,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')    # --> we are doing this so that o
 
 MEDIA_URL = '/media/'
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://vibely-3-h8oc.onrender.com",  # your Render domain
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# Optional: for extra security
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True  # Redirect HTTP -> HTTPS
+
