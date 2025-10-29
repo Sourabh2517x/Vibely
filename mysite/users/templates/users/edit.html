@@ -72,20 +72,25 @@
         padding: 10px 14px;
         border-radius: 8px;
         font-size: 1rem;
-        transition: border 0.2s, background 0.2s;
+        transition: border 0.2s, background 0.2s, color 0.2s;
     }
 
+    /* ✅ Fixed input focus issue */
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus {
         outline: none;
         border-color: #006bff;
-        background-color: #333;
+        background-color: var(--input-bg);
+        color: var(--input-text);
+        box-shadow: 0 0 5px rgba(0, 107, 255, 0.4);
     }
 
+    /* ✅ Improved placeholder color */
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-        color: #aaa;
+        color: var(--text-color);
+        opacity: 0.6;
     }
 
     .btn-primary {
@@ -131,16 +136,15 @@
     #theme-toggle:hover {
         background-color: #0056d1;
     }
+
     #theme-toggle {
-        margin: 0;               /* remove extra margin */
-        padding: 6px 12px;       /* add internal padding for size */
-        vertical-align: middle;  /* align with navbar content */
+        margin: 0;
+        padding: 6px 12px;
+        vertical-align: middle;
     }
 </style>
 
 <div class="form-container my-4">
-    
-
     <h2>Update Profile</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -169,6 +173,4 @@
         <button type="submit" class="btn-primary">Save Changes</button>
     </form>
 </div>
-
-
 {% endblock %}

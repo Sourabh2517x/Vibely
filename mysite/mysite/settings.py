@@ -1,18 +1,18 @@
 from pathlib import Path
 import os
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-oeq^l8o6(6e=6sqtr-5t1*jz1=o#c7%mp_+&emx!5o92tc#2!z'
 
-# ✅ Debug off for production
-DEBUG = False
+# Deployment settings
+DEBUG = True  # Must be False on Render
 
 ALLOWED_HOSTS = ["vibely-3-h8oc.onrender.com", "localhost", "127.0.0.1"]
 
-# --------------------
-# Apps
-# --------------------
+# Application definition
 INSTALLED_APPS = [
     'users',
     'posts',
@@ -24,12 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# --------------------
-# Middleware (with Whitenoise)
-# --------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # 👈 serves static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,9 +53,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# --------------------
-# Database (still SQLite — consider PostgreSQL later)
-# --------------------
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -67,9 +61,7 @@ DATABASES = {
     }
 }
 
-# --------------------
 # Password validation
-# --------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
@@ -77,50 +69,33 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-# --------------------
-# I18N
-# --------------------
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# --------------------
-# Static & Media
-# --------------------
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = 'static/'
 
-# Enable gzip/compression for static files
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
+# Media files
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
 
-# --------------------
-# Auth
-# --------------------
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Login redirect
 LOGIN_REDIRECT_URL = '/'
 
-# --------------------
-# Email
-# --------------------
+# Email backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# --------------------
-# Security
-# --------------------
+# CSRF and security settings
 CSRF_TRUSTED_ORIGINS = ["https://vibely-3-h8oc.onrender.com"]
-
-CSRF_COOKIE_SECURE = not DEBUG
-SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # 👈 prevents redirect loops
+SECURE_SSL_REDIRECT = False

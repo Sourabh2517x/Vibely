@@ -5,7 +5,6 @@
     /* Full-screen flex container */
     .login-container {
         min-height: calc(100vh - 120px);
-        /* adjust if top/bottom nav exists */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -20,45 +19,48 @@
         width: 100%;
         max-width: 400px;
         box-sizing: border-box;
-        transition: background 0.3s, color 0.3s, border 0.3s;
+        transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s;
     }
 
     .login-form label {
         display: block;
         margin-bottom: 6px;
-        font-weight: bold;
+        font-weight: 600;
         color: #333;
         transition: color 0.3s;
     }
 
+    /* ✅ Fixed input design */
     .login-form input,
     .login-form select,
     .login-form textarea {
         width: 100%;
-        padding: 10px;
+        padding: 10px 14px;
         border-radius: 8px;
-        border: 1px solid #000;
+        border: 1px solid #ccc;
         outline: none;
-        background: #000;
-        color: #fff;
-        font-size: 14px;
-        margin-bottom: 12px;
+        background: #f4f4f4;
+        color: #000;
+        font-size: 15px;
+        margin-bottom: 14px;
         transition: border 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
     }
 
     .login-form input::placeholder,
     .login-form textarea::placeholder {
-        color: #bbb;
-        transition: color 0.3s;
+        color: #777;
     }
 
     .login-form input:focus,
     .login-form select:focus,
     .login-form textarea:focus {
         border-color: #2575fc;
-        box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+        box-shadow: 0 0 6px rgba(37, 117, 252, 0.4);
+        background: #fff;
+        color: #000;
     }
 
+    /* Button styling */
     .login-form button {
         width: 100%;
         padding: 12px;
@@ -86,7 +88,11 @@
         transition: color 0.3s;
     }
 
-    /* Dark mode */
+    .login-form a:hover {
+        color: #6a11cb;
+    }
+
+    /* ✅ Dark mode */
     body.dark-mode {
         background: #121212;
         color: #f1f1f1;
@@ -96,7 +102,7 @@
         background: #1e1e1e;
         border: 1px solid #333;
         color: #f1f1f1;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     body.dark-mode .login-form label,
@@ -107,9 +113,18 @@
     body.dark-mode .login-form input,
     body.dark-mode .login-form select,
     body.dark-mode .login-form textarea {
-        background: #333;
+        background: #2a2a2a;
         color: #fff;
         border: 1px solid #555;
+    }
+
+    body.dark-mode .login-form input:focus,
+    body.dark-mode .login-form select:focus,
+    body.dark-mode .login-form textarea:focus {
+        background: #333;
+        color: #fff;
+        border-color: #2575fc;
+        box-shadow: 0 0 6px rgba(37, 117, 252, 0.5);
     }
 
     body.dark-mode .login-form input::placeholder,
